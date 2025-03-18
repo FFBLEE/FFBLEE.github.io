@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html data-theme="retro" lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Castorice Countdown</title>
+  <link rel="icon" href="pics/march7.jpg" type="icon" />
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+
+  <script>
+    function startCountdown() {
+      const targetDate = new Date("2025-04-09T10:00:00+07:00").getTime();
+
+      
+      const countdownEls = document.querySelectorAll(".countdown span[aria-live='polite']");
+      const daysSpan = countdownEls[0];
+      const hoursSpan = countdownEls[1];
+      const minutesSpan = countdownEls[2];
+      const secondsSpan = countdownEls[3];
+
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const timeLeft = targetDate - now;
+
+        
+        if (timeLeft <= 0) {
+          [daysSpan, hoursSpan, minutesSpan, secondsSpan].forEach(el => {
+            el.style.setProperty("--value", "00");
+            el.setAttribute("aria-label", "00");
+            el.textContent = "00";
+          });
+          return;
+        }
+
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        
+        daysSpan.style.setProperty("--value", days);
+        daysSpan.setAttribute("aria-label", days);
+        daysSpan.textContent = days;
+
+        hoursSpan.style.setProperty("--value", hours);
+        hoursSpan.setAttribute("aria-label", hours);
+        hoursSpan.textContent = hours;
+
+        minutesSpan.style.setProperty("--value", minutes);
+        minutesSpan.setAttribute("aria-label", minutes);
+        minutesSpan.textContent = minutes;
+
+        secondsSpan.style.setProperty("--value", seconds);
+        secondsSpan.setAttribute("aria-label", seconds);
+        secondsSpan.textContent = seconds;
+      }
+
+      
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+    }
+
+    
+    window.onload = startCountdown;
+  </script>
+</head>
+
+<body>
+
+  <br>
+  <div class="flex flex-col items-center justify-center ">
+    <div class="mockup-code w-half">
+      <pre data-prefix="$"><code>This is a fun project just for me to learn how to use GitHub Pages</code></pre>
+      <pre data-prefix="$"><code>and I'm really excited to wait to get the new character Castorice in Honkai Star Rail Version 3.2</code></pre>
+    </div>
+  </div>
+
+  
+  
+  <div class="flex flex-col items-center justify-center h-screen">
+    <div class="grid auto-cols-max grid-flow-col gap-5 text-center">
+      <div class="flex flex-col">
+        <span class="countdown font-mono text-5xl">
+          <span style="--value:15;" aria-live="polite" aria-label="00"></span>
+        </span>
+        days
+      </div>
+      <div class="flex flex-col">
+        <span class="countdown font-mono text-5xl">
+          <span style="--value:10;" aria-live="polite" aria-label="24"></span>
+        </span>
+        hours
+      </div>
+      <div class="flex flex-col">
+        <span class="countdown font-mono text-5xl">
+          <span style="--value:24;" aria-live="polite" aria-label="60">24</span>
+        </span>
+        min
+      </div>
+      <div class="flex flex-col">
+        <span class="countdown font-mono text-5xl">
+          <span style="--value:59;" aria-live="polite" aria-label="60"></span>
+        </span>
+        sec
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
